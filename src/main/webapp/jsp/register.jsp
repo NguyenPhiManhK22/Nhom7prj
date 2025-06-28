@@ -2,46 +2,37 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Đăng ký</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/login.css" />
 </head>
 <body>
-
-<div class="form-container">
-    <form action="RegisterServlet" method="post" class="form-box">
-        <h2>Đăng ký</h2>
-
-        <div class="form-group">
-            <label for="hoTen">Họ tên:</label>
-            <input type="text" name="hoTen" id="hoTen" required>
-        </div>
-
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input type="email" name="email" id="email" required>
-        </div>
-
-        <div class="form-group">
-            <label for="matKhau">Mật khẩu:</label>
-            <input type="password" name="matKhau" id="matKhau" required>
-        </div>
-
-        <div class="form-group">
-            <label for="soDienThoai">Số điện thoại:</label>
-            <input type="text" name="soDienThoai" id="soDienThoai" required>
-        </div>
-
-        <div class="form-group">
-            <label for="diaChi">Địa chỉ:</label>
-            <input type="text" name="diaChi" id="diaChi" required>
-        </div>
-
-        <button type="submit" class="btn">Đăng ký</button>
-
-        <p class="form-footer">Đã có tài khoản? <a href="login.jsp">Đăng nhập</a></p>
+<div class="auth-container">
+    <div class="auth-form">
+    <h2>Đăng ký tài khoản</h2>
+    <form action="register" method="post">
+        <label for="hoten">Họ tên:</label><br/>
+        <input type="text" id="hoten" name="hoten" required/><br/><br/>
+        
+        <label for="email">Email:</label><br/>
+        <input type="email" id="email" name="email" required/><br/><br/>
+        
+        <label for="matkhau">Mật khẩu:</label><br/>
+        <input type="password" id="matkhau" name="matkhau" required/><br/><br/>
+        
+        <label for="sdt">Số điện thoại:</label><br/>
+        <input type="text" id="sdt" name="sdt"/><br/><br/>
+        
+        <label for="diachi">Địa chỉ:</label><br/>
+        <textarea id="diachi" name="diachi" rows="3"></textarea><br/><br/>
+        
+        <button type="submit">Đăng ký</button>
     </form>
+    <p>Đã có tài khoản? <a href="login">Đăng nhập</a></p>
+    <p style="color:red;">
+        <%= request.getAttribute("errorMsg") != null ? request.getAttribute("errorMsg") : "" %>
+    </p>
 </div>
-
+</div>
 </body>
 </html>

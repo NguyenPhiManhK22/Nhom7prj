@@ -1,0 +1,42 @@
+/* CSS cho phần thanh toán */
+.payment-container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.payment-container h2 {
+    font-size: 24px;
+    text-align: center;
+    color: #333;
+}
+
+.payment-container p {
+    font-size: 16px;
+    text-align: center;
+    color: #666;
+}
+
+.payment-container a {
+    display: block;
+    text-align: center;
+    font-size: 16px;
+    color: #007bff;
+    text-decoration: none;
+    margin-top: 20px;
+}
+
+.payment-container a:hover {
+    text-decoration: underline;
+}
+
+/* Đảm bảo các phần header vẫn giữ nguyên */
+.top-header {
+    background-color: #000;
+    color: white;
+    padding: 10px 0;
+    font-family: Arial, sans-serif;
+}

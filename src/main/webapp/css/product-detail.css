@@ -1,0 +1,48 @@
+@charset "UTF-8";
+/* product-detail.css */
+
+
+
+.product-detail {
+    background-color: #000;
+    padding: 30px;
+    margin: 40px 0;
+    border-radius: 15px;
+    max-width: 900px;
+    width: 90%;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.7);
+    display: flex;
+    gap: 40px;
+}
+
+.product-detail img {
+    max-width: 400px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+.product-detail h2 {
+    margin-top: 0;
+    font-size: 32px;
+    font-weight: bold;
+    color: #1e90ff; /* màu xanh nổi bật */
+}
+
+.product-detail p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 12px 0;
+    color: #ccc;
+}
+
+.product-detail strong {
+    color: #fff;
+}
+
+/* Phần thông tin bên phải */
+.product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}

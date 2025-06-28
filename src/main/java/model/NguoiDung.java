@@ -8,6 +8,7 @@ public class NguoiDung {
     private String soDienThoai;
     private String diaChi;
     private String vaiTro;
+    private String ngayTao;
 
     // Constructors
     public NguoiDung() {}
@@ -21,7 +22,7 @@ public class NguoiDung {
         this.vaiTro = vaiTro;
     }
 
-    // Getters và Setters
+    // Getter & Setter
     public int getMaNguoiDung() {
         return maNguoiDung;
     }
@@ -76,5 +77,13 @@ public class NguoiDung {
 
     public void setVaiTro(String vaiTro) {
         this.vaiTro = vaiTro;
+    }
+
+    public String getNgayTao() {
+        return ngayTao;
+    }
+
+    public void setNgayTao(String ngayTao) {
+        this.ngayTao = ngayTao;
     }
 }

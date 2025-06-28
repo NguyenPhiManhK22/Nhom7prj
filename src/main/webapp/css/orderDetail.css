@@ -1,0 +1,108 @@
+/* Đặt lại các margin và padding */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Cài đặt cho body */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    display: flex;
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    min-height: 100vh; /* Chiếm toàn bộ chiều cao */
+    padding: 20px;
+}
+
+h2, h3 {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Cấu trúc container */
+.container {
+    background-color: #fff;
+    padding: 20px;
+    width: 80%;
+    max-width: 900px; /* Giới hạn chiều rộng */
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Cấu trúc thông tin đơn hàng */
+.order-info {
+    margin-bottom: 30px;
+}
+
+.order-info p {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.order-info strong {
+    color: #007bff; /* Màu sắc cho các tiêu đề thông tin */
+}
+
+/* Cấu trúc bảng sản phẩm trong đơn hàng */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #ddd;
+    font-size: 16px;
+}
+
+table th {
+    background-color: #f8f8f8;
+    font-weight: bold;
+}
+
+table td {
+    background-color: #fafafa;
+}
+
+/* Nút quay lại */
+.btn {
+    display: inline-block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-decoration: none;
+    border-radius: 4px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.btn-primary {
+    margin-left: auto;
+    margin-right: auto;
+    display: block; /* Căn giữa */
+}
+
+/* Cải thiện hiển thị trên màn hình nhỏ */
+@media (max-width: 768px) {
+    table th, table td {
+        font-size: 14px; /* Thu nhỏ font-size cho bảng trên màn hình nhỏ */
+        padding: 8px;
+    }
+
+    .container {
+        width: 100%;
+        padding: 15px;
+    }
+}
