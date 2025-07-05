@@ -11,11 +11,14 @@ import model.NguoiDung;
 import model.SanPham;
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import dao.ChiTietDonHangDAO;
+import dao.DonHangDAO;
 import dao.GioHangDAO;
 import dao.SanPhamDAO;
-import dao.ThanhToanDAO;
 
 /**
  * Servlet implementation class ThanhToanServlet
@@ -41,33 +44,61 @@ public class ThanhToanServlet extends HttpServlet {
         List<GioHang> cart = gioHangDAO.getCartByUser(userLogin.getMaNguoiDung());
 
         double totalAmount = 0;
+        SanPhamDAO sanPhamDAO = new SanPhamDAO();
+        Map<Integer, SanPham> sanPhamMap = new HashMap<>();
+
         for (GioHang item : cart) {
-            SanPhamDAO sanPhamDAO = new SanPhamDAO();
             SanPham sanPham = sanPhamDAO.getSanPhamById(item.getMaSanPham());
             if (sanPham != null) {
                 totalAmount += sanPham.getGia() * item.getSoLuong();
+                sanPhamMap.put(item.getMaSanPham(), sanPham); // Lưu lại sản phẩm để dùng sau
             }
         }
 
         // Lấy phương thức thanh toán từ form
         String phuongThucThanhToan = request.getParameter("phuongThucThanhToan");
 
-        // Giả sử bạn lưu thông tin thanh toán vào cơ sở dữ liệu
-        ThanhToanDAO thanhToanDAO = new ThanhToanDAO();
-        boolean paymentSuccess = thanhToanDAO.processPayment(userLogin.getMaNguoiDung(), totalAmount, phuongThucThanhToan);
-
-        // Xử lý thanh toán thành công
+        // ✅ Bắt đầu xử lý thanh toán và lưu đơn hàng
         if (phuongThucThanhToan != null) {
-            // Bạn có thể thêm logic thanh toán ở đây
+            // 1. Tạo đơn hàng
+            DonHangDAO donHangDAO = new DonHangDAO();
+            int maDonHang = donHangDAO.taoDonHang(userLogin.getMaNguoiDung(), totalAmount); // trạng thái mặc định: 'cho_xu_ly'
 
-            // Sau khi xử lý thanh toán, chuyển hướng đến trang tương ứng
-            if ("tien_mat".equals(phuongThucThanhToan)) {
-                response.sendRedirect(request.getContextPath() + "/jsp/tienmat.jsp");
-            } else if ("chuyen_khoan".equals(phuongThucThanhToan)) {
-                response.sendRedirect(request.getContextPath() + "/jsp/chuyenkhoan.jsp");
-            } else if ("vi_dien_tu".equals(phuongThucThanhToan)) {
-                response.sendRedirect(request.getContextPath() + "/jsp/vidientu.jsp");
+            if (maDonHang > 0) {
+                // 2. Lưu chi tiết đơn hàng (bao gồm tên sản phẩm)
+                ChiTietDonHangDAO chiTietDAO = new ChiTietDonHangDAO();
+                for (GioHang item : cart) {
+                    SanPham sp = sanPhamMap.get(item.getMaSanPham());
+                    if (sp != null) {
+                        chiTietDAO.themChiTietDonHang(
+                            maDonHang,
+                            sp.getMaSanPham(),
+                            sp.getTenSanPham(), // ✅ thêm tên sản phẩm
+                            item.getSoLuong(),
+                            sp.getGia()
+                        );
+                    }
+                }
+
+                // 3. Xóa giỏ hàng sau khi thanh toán
+                gioHangDAO.clearCartByUser(userLogin.getMaNguoiDung());
+
+                // 4. Chuyển hướng đến trang thanh toán tương ứng
+                if ("tien_mat".equals(phuongThucThanhToan)) {
+                    response.sendRedirect(request.getContextPath() + "/jsp/tienmat.jsp");
+                } else if ("chuyen_khoan".equals(phuongThucThanhToan)) {
+                    response.sendRedirect(request.getContextPath() + "/jsp/chuyenkhoan.jsp");
+                } else if ("vi_dien_tu".equals(phuongThucThanhToan)) {
+                    response.sendRedirect(request.getContextPath() + "/jsp/vidientu.jsp");
+                } else {
+                    response.sendRedirect(request.getContextPath() + "/jsp/thanhtoanthanhcong.jsp");
+                }
+
+            } else {
+                request.setAttribute("error", "Không thể tạo đơn hàng.");
+                request.getRequestDispatcher("/jsp/thanhtoan.jsp").forward(request, response);
             }
+
         } else {
             // Nếu không có phương thức thanh toán, quay lại trang giỏ hàng
             request.setAttribute("error", "Chưa chọn phương thức thanh toán.");

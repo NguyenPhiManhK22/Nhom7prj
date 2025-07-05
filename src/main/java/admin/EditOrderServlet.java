@@ -18,49 +18,51 @@ import dao.DonHangDAO;
 @WebServlet("/admin/orders/edit")
 public class EditOrderServlet extends HttpServlet {
 
+    // Hiển thị form sửa đơn hàng
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Lấy ID đơn hàng từ tham số trong URL
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
         int maDonHang = Integer.parseInt(request.getParameter("id"));
 
-        // Sử dụng DAO để lấy thông tin đơn hàng từ cơ sở dữ liệu
-        DonHangDAO donHangDAO = new DonHangDAO();
-        DonHang donHang = donHangDAO.getDonHangById(maDonHang);
+        DonHangDAO dao = new DonHangDAO();
+        DonHang donHang = dao.getDonHangById(maDonHang);
 
         if (donHang != null) {
-            // Chuyển dữ liệu đơn hàng vào trang JSP để hiển thị
             request.setAttribute("donHang", donHang);
-            request.getRequestDispatcher("/view/admin/editOrder.jsp").forward(request, response);
+            request.getRequestDispatcher("/admin/editOrder.jsp").forward(request, response);
         } else {
-            // Nếu không tìm thấy đơn hàng, chuyển hướng về trang danh sách đơn hàng
-            response.sendRedirect(request.getContextPath() + "/admin/orders");
+            response.sendRedirect(request.getContextPath() + "/admin/orders?error=notfound");
         }
     }
 
+    // Xử lý cập nhật đơn hàng
     @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // Lấy dữ liệu từ form
-        int maDonHang = Integer.parseInt(request.getParameter("id"));
-        String trangThai = request.getParameter("trangThai");
-        double tongTien = Double.parseDouble(request.getParameter("tongTien"));
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            int maDonHang = Integer.parseInt(request.getParameter("id"));
+            String trangThai = request.getParameter("trangThai");
+            double tongTien = Double.parseDouble(request.getParameter("tongTien"));
 
-        // Tạo đối tượng DonHang mới để lưu thông tin
-        DonHang donHang = new DonHang();
-        donHang.setMaDonHang(maDonHang);
-        donHang.setTrangThai(trangThai);
-        donHang.setTongTien(tongTien);
+            DonHang donHang = new DonHang();
+            donHang.setMaDonHang(maDonHang);
+            donHang.setTrangThai(trangThai);
+            donHang.setTongTien(tongTien);
 
-        // Cập nhật thông tin đơn hàng
-        DonHangDAO donHangDAO = new DonHangDAO();
-        boolean isUpdated = donHangDAO.updateDonHang(donHang);
+            DonHangDAO dao = new DonHangDAO();
+            boolean success = dao.capNhatDonHang(donHang);
 
-        if (isUpdated) {
-            // Nếu cập nhật thành công, chuyển hướng về trang danh sách đơn hàng
-            response.sendRedirect(request.getContextPath() + "/admin/orders");
-        } else {
-            // Nếu cập nhật thất bại, hiển thị lỗi và quay lại trang sửa
-            request.setAttribute("errorMessage", "Cập nhật đơn hàng thất bại!");
-            request.getRequestDispatcher("/view/admin/editOrder.jsp").forward(request, response);
+            if (success) {
+                response.sendRedirect(request.getContextPath() + "/admin/orders?success=true");
+            } else {
+                request.setAttribute("donHang", donHang);
+                request.setAttribute("error", "Cập nhật thất bại.");
+                request.getRequestDispatcher("/admin/editOrder.jsp").forward(request, response);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("error", "Lỗi khi xử lý dữ liệu.");
+            request.getRequestDispatcher("/admin/editOrder.jsp").forward(request, response);
         }
     }
 }

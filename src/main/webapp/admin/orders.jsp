@@ -40,7 +40,7 @@
                 <td><%= order.getNgayTao() %></td>
                 <td>
                 <a href="orderDetails.jsp?id=<%= order.getMaDonHang() %>" class="btn btn-info">Chi tiết</a>
-                <a href="editOrder.jsp?id=<%= order.getMaDonHang() %>" class="btn btn-warning">Sửa</a>
+                <a href="<%= request.getContextPath() %>/admin/orders/edit?id=<%= order.getMaDonHang() %>" class="btn btn-warning" >Sửa</a>
                 
             </td>
         </tr>

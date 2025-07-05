@@ -1,21 +1,56 @@
-
 package model;
 
-import java.math.BigDecimal;
-
 public class ChiTietDonHang {
-    private SanPham sanPham;
+    private int maChiTietDonHang;
+    private int maDonHang;
+    private int maSanPham;
+    private String tenSanPham; // mới thêm
     private int soLuong;
-    private BigDecimal giaBan;
-    private BigDecimal thanhTien;
+    private double giaBan;
 
-    // Getters & Setters
-    public SanPham getSanPham() {
-        return sanPham;
+    public ChiTietDonHang() {
     }
 
-    public void setSanPham(SanPham sanPham) {
-        this.sanPham = sanPham;
+    public ChiTietDonHang(int maChiTietDonHang, int maDonHang, int maSanPham, String tenSanPham, int soLuong, double giaBan) {
+        this.maChiTietDonHang = maChiTietDonHang;
+        this.maDonHang = maDonHang;
+        this.maSanPham = maSanPham;
+        this.tenSanPham = tenSanPham;
+        this.soLuong = soLuong;
+        this.giaBan = giaBan;
+    }
+
+    // Getter và Setter
+    public int getMaChiTietDonHang() {
+        return maChiTietDonHang;
+    }
+
+    public void setMaChiTietDonHang(int maChiTietDonHang) {
+        this.maChiTietDonHang = maChiTietDonHang;
+    }
+
+    public int getMaDonHang() {
+        return maDonHang;
+    }
+
+    public void setMaDonHang(int maDonHang) {
+        this.maDonHang = maDonHang;
+    }
+
+    public int getMaSanPham() {
+        return maSanPham;
+    }
+
+    public void setMaSanPham(int maSanPham) {
+        this.maSanPham = maSanPham;
+    }
+
+    public String getTenSanPham() {
+        return tenSanPham;
+    }
+
+    public void setTenSanPham(String tenSanPham) {
+        this.tenSanPham = tenSanPham;
     }
 
     public int getSoLuong() {
@@ -26,19 +61,11 @@ public class ChiTietDonHang {
         this.soLuong = soLuong;
     }
 
-    public BigDecimal getGiaBan() {
+    public double getGiaBan() {
         return giaBan;
     }
 
-    public void setGiaBan(BigDecimal giaBan) {
+    public void setGiaBan(double giaBan) {
         this.giaBan = giaBan;
-    }
-
-    public BigDecimal getThanhTien() {
-        return thanhTien;
-    }
-
-    public void setThanhTien(BigDecimal thanhTien) {
-        this.thanhTien = thanhTien;
     }
 }

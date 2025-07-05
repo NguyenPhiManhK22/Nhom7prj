@@ -33,7 +33,8 @@
             <input type="number" id="gia" name="gia" value="<%= product.getGia() %>" required /><br />
 
             <label for="moTa">Mô tả:</label>
-            <textarea id="moTa" name="moTa" required><%= product.getMoTa() %></textarea><br />
+			<textarea id="moTa" name="moTa" required style="width: 400px; height: 120px; resize: none; border: 1px solid #ccc; padding: 8px; border-radius: 4px;"><%= product.getMoTa() %></textarea><br />
+
 
             <label for="soLuong">Số lượng trong kho:</label>
             <input type="number" id="soLuong" name="soLuong" value="<%= product.getSoLuongTrongKho() %>" required /><br />
@@ -60,7 +61,7 @@
         %>
 
         <div class="back-btn">
-            <a href="admin/products" class="btn btn-secondary">Quay lại trang quản lý sản phẩm</a>
+            <a href="products" class="btn btn-secondary">Quay lại trang quản lý sản phẩm</a>
         </div>
     </div>
 </body>

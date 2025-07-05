@@ -120,5 +120,14 @@ public class GioHangDAO {
 		
 	}
 	
-	
+	public void clearCartByUser(int maNguoiDung) {
+	    String sql = "DELETE FROM GioHang WHERE ma_nguoi_dung = ?";
+	    try (Connection conn = DBConnection.getConnection();
+	         PreparedStatement ps = conn.prepareStatement(sql)) {
+	        ps.setInt(1, maNguoiDung);
+	        ps.executeUpdate();
+	    } catch (Exception e) {
+	        e.printStackTrace();
+	    }
+	}
 }

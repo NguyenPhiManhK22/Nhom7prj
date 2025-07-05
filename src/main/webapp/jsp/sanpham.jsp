@@ -6,7 +6,7 @@
 <html lang="vi">
 <head>
     <meta charset="UTF-8" />
-    <title>Danh sách sản phẩm - TechShop</title>
+    <title>Danh sách sản phẩm - HawkStore</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 </head>
@@ -24,7 +24,7 @@
         </div>
 
         <div class="header-icons">
-            <a href="hethongcuahang"><i class="fas fa-map-marker-alt"></i><span>Hệ thống cửa hàng</span></a>
+            <a href="jsp/Hethongcuahang.jsp"><i class="fas fa-map-marker-alt"></i><span>Hệ thống cửa hàng</span></a>
 
             <%
                 NguoiDung userLogin = (NguoiDung) session.getAttribute("userLogin");
@@ -47,15 +47,15 @@
 
 <nav class="main-nav">
     <ul>
-        <li><a href="index"><i class="fa fa-home"></i>TRANG CHỦ</a></li>
-        <li><a href="sanpham">SẢN PHẨM</a></li>
-        <li><a href="#">TIN CÔNG NGHỆ <i class="fas fa-bolt"></i></a></li>
-        <li><a href="#">ĐƠN HÀNG</a></li>
+        <li><a href="<%= request.getContextPath() %>/index"><i class="fa fa-home"></i>TRANG CHỦ</a></li>
+        <li><a href="<%= request.getContextPath() %>/sanpham">SẢN PHẨM</a></li>
+        <li><a href="jsp/tintuc.jsp"> TIN CÔNG NGHỆ <i class="fas fa-bolt"></i></a></li>
+        <li><a href="<%= request.getContextPath() %>/donhang"> ĐƠN HÀNG </a></li>
     </ul>
 </nav>
 
 <div class="container">
-    <h1>Danh sách sản phẩm</h1>
+    
 </div>
 
 <div class="products-wrapper">
@@ -67,7 +67,7 @@
     <div class="product-card">
         <img src="<%=request.getContextPath() + "/" + sp.getDuongDanAnh()%>" alt="<%=sp.getTenSanPham()%>" />
         <h3><%=sp.getTenSanPham()%></h3>
-        <p><%=sp.getMoTa()%></p>
+        <p><%= sp.getMoTa().replaceAll(",", "<br>") %></p>
         <p>Giá: <%=String.format("%,.0f", sp.getGia())%> VNĐ</p>
         <a href="addToCart?maSanPham=<%= sp.getMaSanPham() %>" class="btn">Thêm vào giỏ</a>
     </div>

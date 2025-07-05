@@ -125,4 +125,33 @@ public class SanPhamDAO {
             return false;
         }
     }
+    
+    public List<SanPham> timKiemSanPham(String keyword) {
+        List<SanPham> list = new ArrayList<>();
+        String sql = "SELECT * FROM SanPham WHERE ten_san_pham LIKE ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, "%" + keyword + "%");
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                SanPham sp = new SanPham();
+                sp.setMaSanPham(rs.getInt("ma_san_pham"));
+                sp.setTenSanPham(rs.getString("ten_san_pham"));
+                sp.setMoTa(rs.getString("mo_ta"));
+                sp.setGia(rs.getDouble("gia"));
+                sp.setSoLuongTrongKho(rs.getInt("so_luong_trong_kho"));
+                sp.setMaDanhMuc(rs.getInt("ma_danh_muc"));
+                sp.setDuongDanAnh(rs.getString("duong_dan_anh"));
+                list.add(sp);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return list;
+    }
 }

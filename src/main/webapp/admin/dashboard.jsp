@@ -26,7 +26,7 @@
             <%
                 } else {
             %>
-                <a href="login"><i class="fas fa-user"></i><span>Đăng nhập</span></a>
+                <a href="<%= request.getContextPath() %>/login"><i class="fas fa-user"></i><span>Đăng nhập</span></a>
             <%
                 }
             %>

@@ -182,8 +182,9 @@ body {
 }
 
 .products-wrapper {
-    display: flex;
-    flex-wrap: wrap;  /* Cho phép xuống hàng */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+     /* Cho phép xuống hàng */
     gap: 20px;        /* Khoảng cách giữa các sản phẩm */
     justify-content: center; 
 }
@@ -293,4 +294,5 @@ button:hover {
 button i {
     margin-right: 8px;
 }
+
 

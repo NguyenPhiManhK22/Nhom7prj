@@ -146,5 +146,43 @@ public class DonHangDAO {
         return products;
     }
     
+    public int taoDonHang(int maNguoiDung, double tongTien) {
+        int maDonHang = -1;
+        String sql = "INSERT INTO DonHang (ma_nguoi_dung, tong_tien, trang_thai) VALUES (?, ?, 'cho_xu_ly')";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
+
+            ps.setInt(1, maNguoiDung);
+            ps.setDouble(2, tongTien);
+
+            ps.executeUpdate();
+
+            ResultSet rs = ps.getGeneratedKeys();
+            if (rs.next()) {
+                maDonHang = rs.getInt(1);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return maDonHang;
+    }
     
+    public boolean capNhatDonHang(DonHang donHang) {
+        String sql = "UPDATE DonHang SET tong_tien = ?, trang_thai = ? WHERE ma_don_hang = ?";
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setDouble(1, donHang.getTongTien());
+            ps.setString(2, donHang.getTrangThai());
+            ps.setInt(3, donHang.getMaDonHang());
+
+            return ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

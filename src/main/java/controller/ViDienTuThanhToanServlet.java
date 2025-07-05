@@ -19,10 +19,6 @@ public class ViDienTuThanhToanServlet extends HttpServlet {
         String ngayHetHan = request.getParameter("ngayHetHan");
         String cvv = request.getParameter("cvv");
 
-        // Xử lý thanh toán ví điện tử
-        // Ở đây bạn có thể thêm logic kết nối với dịch vụ thanh toán ví điện tử
-
-        // Chuyển hướng đến trang thanh toán thành công
         response.sendRedirect(request.getContextPath() + "/ketnoithanhcong");
     }
 }

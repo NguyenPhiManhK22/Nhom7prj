@@ -23,7 +23,7 @@
         </div>
 
         <div class="header-icons">
-            <a href="hethongcuahang"><i class="fas fa-map-marker-alt"></i><span>Hệ thống cửa hàng</span></a>
+            <a href="jsp/Hethongcuahang.jsp"><i class="fas fa-map-marker-alt"></i><span>Hệ thống cửa hàng</span></a>
 
             <%
                 NguoiDung userLogin = (NguoiDung) session.getAttribute("userLogin");
@@ -39,17 +39,17 @@
                 }
             %>
 
-            <a href="giohang"><i class="fas fa-shopping-cart"></i><span>Giỏ hàng</span></a>
+            <a href="<%= request.getContextPath() %>/giohang"><i class="fas fa-shopping-cart"></i><span>Giỏ hàng</span></a>><i class="fas fa-shopping-cart"></i><span>Giỏ hàng</span></a>
         </div>
     </div>
 </header>
 
 <nav class="main-nav">
     <ul>
-        <li><a href="index"><i class="fa fa-home"></i>TRANG CHỦ</a></li>
-        <li><a href="sanpham">SẢN PHẨM</a></li>
-        <li><a href="#"> TIN CÔNG NGHỆ <i class="fas fa-bolt"></i></a></li>
-        <li><a href="#"> ĐƠN HÀNG </a></li>
+        <li><a href="<%= request.getContextPath() %>/index"><i class="fa fa-home"></i>TRANG CHỦ</a></li>
+        <li><a href="<%= request.getContextPath() %>/sanpham">SẢN PHẨM</a></li>
+        <li><a href="jsp/tintuc.jsp"> TIN CÔNG NGHỆ <i class="fas fa-bolt"></i></a></li>
+        <li><a href="<%= request.getContextPath() %>/donhang"> ĐƠN HÀNG </a></li>
     </ul>
 </nav>
 <body>
@@ -67,7 +67,7 @@
 			</a>
             
             <!-- Nút Quay lại trang chủ -->
-            <a href="index" class="btn-back-home">Quay lại trang chủ</a>
+            <a href="<%= request.getContextPath() %>/index" class="btn-back-home">Quay lại trang chủ</a>
         </div>
     </div>
 </body>

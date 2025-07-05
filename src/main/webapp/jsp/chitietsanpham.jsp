@@ -21,7 +21,7 @@
         </div>
 
         <div class="header-icons">
-            <a href="Hethongcuahang.jsp"><i class="fas fa-map-marker-alt"></i><span>Hệ thống cửa hàng</span></a>
+            <a href="jsp/Hethongcuahang.jsp"><i class="fas fa-map-marker-alt"></i><span>Hệ thống cửa hàng</span></a>
             <a href="login.jsp"><i class="fas fa-user"></i><span>Đăng nhập</span></a>
             <a href="giohang.jsp"><i class="fas fa-shopping-cart"></i><span>Giỏ hàng</span></a>
         </div>
@@ -30,10 +30,10 @@
 
 <nav class="main-nav">
     <ul>
-        <li><a href="index"><i class="fa fa-home"></i>TRANG CHỦ</a></li>
-        <li><a href="sanpham">SẢN PHẨM</a></li>
-        <li><a href="#">KHUYẾN MÃI <i class="fas fa-bolt"></i></a></li>
-        <li><a href="#">TIN CÔNG NGHỆ</a></li>
+        <li><a href="<%= request.getContextPath() %>/index"><i class="fa fa-home"></i>TRANG CHỦ</a></li>
+        <li><a href="<%= request.getContextPath() %>/sanpham">SẢN PHẨM</a></li>
+        <li><a href="jsp/tintuc.jsp"> TIN CÔNG NGHỆ <i class="fas fa-bolt"></i></a></li>
+        <li><a href="<%= request.getContextPath() %>/donhang"> ĐƠN HÀNG </a></li>
     </ul>
 </nav>
 <body>

@@ -18,8 +18,7 @@
             <tr>
                 <th>Mã Người Dùng</th>
                 <th>Họ Tên</th>
-                <th>Email</th>
-                <th>Số Điện Thoại</th>
+                <th>Email</th>               
                 <th>Vai Trò</th>
                 <th>Thao Tác</th>
             </tr>
@@ -34,11 +33,10 @@
                 <td><%= user.getMaNguoiDung() %></td>
                 <td><%= user.getHoTen() %></td>
                 <td><%= user.getEmail() %></td>
-                <td><%= user.getSoDienThoai() %></td>
                 <td><%= user.getVaiTro() %></td>
                 <td>
-                    <a href="editUser.jsp?id=<%= user.getMaNguoiDung() %>" class="btn btn-warning">Sửa</a>
-                    <a href="deleteUser?id=<%= user.getMaNguoiDung() %>" class="btn btn-danger">Xóa</a>
+             		 
+                    <a href="deleteUser?id=<%= user.getMaNguoiDung() %>" class="btn btn-danger" onclick="return confirm('Bạn có chắc chắn muốn xóa người dùng này?')">Xóa</a>
                 </td>
             </tr>
             <%

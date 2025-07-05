@@ -1,56 +1,64 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="model.DonHang" %>
-<%@ page import="dao.DonHangDAO" %>
 
 <html lang="vi">
 <head>
     <meta charset="UTF-8" />
     <title>Sửa Đơn Hàng</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/orderDetail.css" />
+    <link rel="stylesheet" href="<%= request.getContextPath() %>/css/style.css" />
+    
 </head>
 <body>
 
-<div class="container">
-    <h2>Sửa Đơn Hàng</h2>
+<div class="container cart-container">
+    <h2 class="cart-header">Sửa Đơn Hàng</h2>
 
     <%
-        // Lấy đối tượng donHang từ request
         DonHang donHang = (DonHang) request.getAttribute("donHang");
 
-        // Kiểm tra nếu donHang là null, in thông báo lỗi
         if (donHang == null) {
-            out.print("Không tìm thấy đơn hàng!");
+    %>
+        <p style="color:red;">Không tìm thấy đơn hàng!</p>
+    <%
         } else {
     %>
 
-    <form action="edit" method="post">
+    <form action="<%= request.getContextPath() %>/admin/orders/edit" method="post">
         <input type="hidden" name="id" value="<%= donHang.getMaDonHang() %>" />
 
-        <div>
-            <label for="trangThai">Trạng thái:</label>
-            <select name="trangThai" id="trangThai">
-                <option value="cho_xu_ly" <%= donHang.getTrangThai().equals("cho_xu_ly") ? "selected" : "" %>>Chờ xử lý</option>
-                <option value="dang_van_chuyen" <%= donHang.getTrangThai().equals("dang_van_chuyen") ? "selected" : "" %>>Đang vận chuyển</option>
-                <option value="da_giao" <%= donHang.getTrangThai().equals("da_giao") ? "selected" : "" %>>Đã giao</option>
-                <option value="da_huy" <%= donHang.getTrangThai().equals("da_huy") ? "selected" : "" %>>Đã hủy</option>
-            </select>
-        </div>
+        <table class="cart-table">
+            <tr>
+                <td><label for="trangThai">Trạng thái:</label></td>
+                <td>
+                    <select name="trangThai" id="trangThai">
+                        <option value="cho_xu_ly" <%= donHang.getTrangThai().equals("cho_xu_ly") ? "selected" : "" %>>Chờ xử lý</option>
+                        <option value="dang_van_chuyen" <%= donHang.getTrangThai().equals("dang_van_chuyen") ? "selected" : "" %>>Đang vận chuyển</option>
+                        <option value="da_giao" <%= donHang.getTrangThai().equals("da_giao") ? "selected" : "" %>>Đã giao</option>
+                        <option value="da_huy" <%= donHang.getTrangThai().equals("da_huy") ? "selected" : "" %>>Đã hủy</option>
+                    </select>
+                </td>
+            </tr>
 
-        <div>
-            <label for="tongTien">Tổng tiền:</label>
-            <input type="text" name="tongTien" id="tongTien" value="<%= donHang.getTongTien() %>" />
-        </div>
+            <tr>
+                <td><label for="tongTien">Tổng tiền:</label></td>
+                <td>
+                     <input type="hidden" name="tongTien" id="tongTienHidden" value="<%= donHang.getTongTien() %>" />
+					 <p><strong>Tổng tiền:</strong> <%= String.format("%,.0f", donHang.getTongTien()) %> VNĐ</p>
+                </td>
+            </tr>
 
-        <div>
-            <button type="submit">Cập nhật</button>
-            <a href="<%= request.getContextPath() %>/admin/orders">Quay lại</a>
-        </div>
+            <tr>
+                <td colspan="2" >
+                    <button type="submit">Cập nhật</button>
+                    <a href="<%= request.getContextPath() %>/admin/orders" class="btn btn-primary">Quay lại</a>
+                </td>
+            </tr>
+        </table>
     </form>
 
     <%
         }
     %>
-
 </div>
 
 </body>

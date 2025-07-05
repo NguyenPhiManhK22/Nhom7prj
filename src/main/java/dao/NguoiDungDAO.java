@@ -120,17 +120,19 @@ public class NguoiDungDAO {
     // Xóa người dùng
     public boolean deleteNguoiDung(int maNguoiDung) {
         String sql = "DELETE FROM NguoiDung WHERE ma_nguoi_dung = ?";
+        
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement ps = conn.prepareStatement(sql)) {
-
             ps.setInt(1, maNguoiDung);
-            return ps.executeUpdate() > 0;
-
+            int rowsAffected = ps.executeUpdate();
+            return rowsAffected > 0;  // Nếu xóa thành công, trả về true
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
     }
+
+
     
     public NguoiDung getNguoiDungById(int maNguoiDung) {
         String sql = "SELECT * FROM NguoiDung WHERE ma_nguoi_dung = ?";
@@ -143,17 +145,17 @@ public class NguoiDungDAO {
                     user.setMaNguoiDung(rs.getInt("ma_nguoi_dung"));
                     user.setHoTen(rs.getString("ho_ten"));
                     user.setEmail(rs.getString("email"));
-                    user.setSoDienThoai(rs.getString("so_dien_thoai"));
+                    user.setSoDienThoai(rs.getString("so_dien_thoai"));  // Đảm bảo lấy đúng
                     user.setDiaChi(rs.getString("dia_chi"));
                     user.setVaiTro(rs.getString("vai_tro"));
+                    user.setNgayTao(rs.getString("ngay_tao"));
                     return user;
                 }
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return null;  // Nếu không tìm thấy người dùng
+        return null;
     }
 }
-
 
